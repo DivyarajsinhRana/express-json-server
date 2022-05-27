@@ -1,4 +1,3 @@
-const { json } = require("express/lib/response");
 
 const userRoutes = (app, fs) => {
     const path = './data/user.json';   // data file path
@@ -51,7 +50,8 @@ const userRoutes = (app, fs) => {
         readFile((data) => {
             const newUserId = Date.now().toString();   // create new user ID
             // add the new user
-            data[newUserId] = req.body;
+            // data[newUserId] = req.body;
+            data.push(req.body);
             writeFile(JSON.stringify(data, null, 2), () => {
                 // res.status(200).send('new user added');
                 // res.status(200).send({"message":"new user added","data":data});
@@ -62,13 +62,17 @@ const userRoutes = (app, fs) => {
 
     // UPDATE 
     app.put('/users/:id', (req, res) => {
-        console.log('calles')
         readFile((data)=>{
             const id = req.params['id'];
-            data[id] = req.body
-            writeFile(JSON.stringify(data,null,2),()=>{
+            let item = data.map((item)=>{
+                if(item.id == id){
+                    item = req.body
+                }
+                return item
+        })
+            writeFile(JSON.stringify(item,null,2),()=>{
                 // res.status(200).send(`user id:${id} is updated`);
-                res.status(200).send(data);
+                res.status(200).send(item);
             });
         },true)
     });
@@ -77,9 +81,14 @@ const userRoutes = (app, fs) => {
     app.delete('/users/:id', (req, res) => {
         readFile((data)=>{
             const id = req.params['id'];
-            delete data[id];
-            writeFile(JSON.stringify(data,null,2),()=>{
-                res.status(200).send(data)
+            let item = data.filter((item)=>{
+                return (
+                    item.id != id
+                )
+        })
+            data.pop(item);
+            writeFile(JSON.stringify(item,null,2),()=>{
+                res.status(200).send(item)
             })
         },true);
     });
