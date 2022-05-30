@@ -52,7 +52,8 @@ const userRoutes = (app, fs) => {
             const newUserId = Date.now().toString();   // create new user ID
             // add the new user
             // data[newUserId] = req.body;
-            data.push(req.body);
+            const id = data.length !== 0 ? parseInt(data[data.length-1].id) + 1 : parseInt(1);
+            data.push({...req.body,id});
             writeFile(JSON.stringify(data, null, 2), () => {
                 // res.status(200).send('new user added');
                 // res.status(200).send({"message":"new user added","data":data});
@@ -67,7 +68,8 @@ const userRoutes = (app, fs) => {
             const id = req.params['id'];
             let item = data.map((item)=>{
                 if(item.id == id){
-                    item = req.body
+                    // const uid = data.length !== 0 ? parseInt(data[data.length-1].id) + 1 : 1;
+                    item = {...req.body,id}
                 }
                 return item
         })
