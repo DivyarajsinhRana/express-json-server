@@ -1,5 +1,6 @@
 
 const userRoutes = (app, fs) => {
+    
     const path = './data/user.json';   // data file path
 
     // refactored helper methods
