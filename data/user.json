@@ -1,20 +1,8 @@
 [
   {
-    "name": "bittu rana",
-    "password": "parlett",
-    "profession": "react developer",
-    "id": 6
-  },
-  {
-    "name": "dc rana",
-    "password": "parlett",
-    "profession": "react developer",
-    "id": 6
-  },
-  {
-    "name": "ram rana",
-    "password": "parlett fsef",
-    "profession": "react developer",
-    "id": 8
+    "name": "yuvraj",
+    "password": "yuvi123",
+    "profession": "developerq",
+    "id": "4"
   }
 ]
