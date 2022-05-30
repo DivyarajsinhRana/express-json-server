@@ -1,6 +1,7 @@
 // import express framework and body-parser helper and fs core module
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors')
 const fs = require('fs');
 const appRouter = require('./routes/appRoute');
 
@@ -8,7 +9,7 @@ const appRouter = require('./routes/appRoute');
 const app = express();
 const port = process.env.PORT || 8000 ;
 // configure our express instance with some body-parser settings
-
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
